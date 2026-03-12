@@ -87,6 +87,9 @@ export function LevelCompleteModal({
                 </div>
 
                 <DialogFooter className="flex flex-col sm:flex-row gap-2 mt-2">
+                    <Button variant="outline" className="flex-1 border-border/50 hover:bg-muted font-mono" onClick={handleHome}>
+                        View Levels
+                    </Button>
                     <Button variant="outline" className="flex-1 border-border/50 hover:bg-muted font-mono" onClick={onReplay}>
                         <RotateCcw className="w-4 h-4 mr-2" />
                         Replay

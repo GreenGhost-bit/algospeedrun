@@ -3,20 +3,21 @@
 import { motion } from "framer-motion"
 import { LevelNode } from "@/components/level-node"
 
+import { levels as originalLevels } from "@/data/levels"
+
 interface LevelMapProps {
   onLevelClick: (level: number) => void
   isConnected: boolean
   maxUnlocked?: number
 }
 
-const levelsData = [
-  { level: 1, label: "The Borderless Economy", description: "Learn the core principles of Algorand." },
-  { level: 2, label: "PyTeal Basics", description: "Write your first smart contract in PyTeal." },
-  { level: 3, label: "Silvio's Vision", description: "Complete the ultimate challenge to earn your praise." },
-]
-
 export function LevelMap({ onLevelClick, isConnected, maxUnlocked = 1 }: LevelMapProps) {
-  const levels = levelsData.map(l => ({ ...l, isLocked: l.level > maxUnlocked }))
+  const levels = originalLevels.map(l => ({
+    level: l.id,
+    label: l.title,
+    description: l.description,
+    isLocked: l.id > maxUnlocked
+  }))
 
   return (
     <section className="relative flex flex-col items-center gap-8 px-4 py-8">

@@ -58,29 +58,30 @@ export function TypingTest({ textToType, targetWpm, onComplete }: TypingTestProp
     return (
         <div className="relative w-full max-w-4xl mx-auto flex flex-col items-center">
             <div
-                className="relative text-xl sm:text-2xl md:text-3xl lg:text-4xl font-mono leading-relaxed tracking-wide text-left cursor-text bg-card/40 p-6 sm:p-10 rounded-xl border border-border/50 backdrop-blur-md shadow-2xl"
+                className="relative text-xl sm:text-2xl md:text-3xl lg:text-4xl font-mono leading-relaxed text-left cursor-text bg-card/40 p-6 sm:p-10 rounded-xl border border-border/50 backdrop-blur-md shadow-2xl"
                 onClick={() => inputRef.current?.focus()}
             >
                 <div className="whitespace-pre-wrap">
                     {characters.map((char, index) => {
-                        let colorClass = "text-muted-foreground/50" // untyped
+                        let colorClass = "text-muted-foreground/50 transition-colors" // untyped
+                        let cursorClass = ""
 
                         if (index < inputValue.length) {
-                            colorClass = inputValue[index] === char ? "text-algo-teal drop-shadow-[0_0_8px_rgba(20,250,200,0.5)]" : "text-destructive drop-shadow-[0_0_8px_rgba(255,50,50,0.5)]"
+                            if (inputValue[index] === char) {
+                                colorClass = "text-algo-teal drop-shadow-[0_0_8px_rgba(20,250,200,0.5)]"
+                            } else {
+                                colorClass = "text-white bg-destructive/90 font-black drop-shadow-[0_0_12px_rgba(255,0,0,0.8)] px-[2px] -mx-[2px] rounded-sm z-10 relative"
+                            }
                         }
 
                         const isCursor = index === inputValue.length
+                        if (isCursor && status !== 'finished') {
+                            cursorClass = "border-b-4 border-algo-purple bg-algo-purple/20"
+                        }
 
                         return (
                             <span key={index} className="relative inline-block">
-                                {isCursor && status !== 'finished' && (
-                                    <motion.span
-                                        animate={{ opacity: [1, 0] }}
-                                        transition={{ repeat: Infinity, duration: 0.8, ease: "linear" }}
-                                        className="absolute left-0 top-[10%] w-[3px] h-[80%] bg-algo-purple"
-                                    />
-                                )}
-                                <span className={`${colorClass} ${char === ' ' && inputValue[index] !== char && index < inputValue.length ? 'bg-destructive/40 border-b-2 border-destructive' : ''}`}>
+                                <span className={`${colorClass} ${cursorClass} ${char === ' ' && inputValue[index] !== char && index < inputValue.length ? 'bg-destructive/90 border-b-4 border-destructive px-[2px] -mx-[2px]' : ''}`}>
                                     {char}
                                 </span>
                             </span>
@@ -88,12 +89,8 @@ export function TypingTest({ textToType, targetWpm, onComplete }: TypingTestProp
                     })}
 
                     {inputValue.length === characters.length && status !== 'finished' && (
-                        <span className="relative inline-block">
-                            <motion.span
-                                animate={{ opacity: [1, 0] }}
-                                transition={{ repeat: Infinity, duration: 0.8, ease: "linear" }}
-                                className="absolute left-0 top-[10%] w-[3px] h-[80%] bg-algo-purple"
-                            />
+                        <span className="relative inline-block min-w-[1ch] border-b-4 border-algo-purple bg-algo-purple/20">
+                            &nbsp;
                         </span>
                     )}
                 </div>
