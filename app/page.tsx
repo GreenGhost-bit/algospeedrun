@@ -1,65 +1,111 @@
-import Image from "next/image";
+"use client"
 
-export default function Home() {
+import { useState, useCallback, useEffect } from "react"
+import { motion } from "framer-motion"
+import { AlertCircle } from "lucide-react"
+import { Header } from "@/components/header"
+import { FloatingIcons } from "@/components/floating-icons"
+import { MouseParticles } from "@/components/mouse-particles"
+import { LevelMap } from "@/components/level-map"
+import { CommunityFooter } from "@/components/community-footer"
+import { useToast } from "@/hooks/use-toast"
+import { useWallet } from "@txnlab/use-wallet-react"
+import { ConnectWalletModal } from "@/components/connect-wallet-modal"
+
+import { useRouter } from "next/navigation"
+
+export default function Page() {
+  const { activeAccount, wallets } = useWallet()
+  const isConnected = !!activeAccount
+  const { toast } = useToast()
+  const router = useRouter()
+  const [maxUnlocked, setMaxUnlocked] = useState(1)
+  const [walletModalOpen, setWalletModalOpen] = useState(false)
+
+  useEffect(() => {
+    const saved = localStorage.getItem('algospeedrun_progress')
+    if (saved) setMaxUnlocked(Math.max(1, parseInt(saved, 10)))
+  }, [])
+
+  const handleConnectWallet = useCallback(() => {
+    if (!isConnected) {
+      setWalletModalOpen(true)
+    } else {
+      wallets.forEach((w) => {
+        if (w.isConnected) w.disconnect()
+      })
+    }
+  }, [isConnected, wallets])
+
+  const handleLevelClick = useCallback(
+    (level: number) => {
+      if (!isConnected) {
+        toast({
+          variant: "destructive",
+          title: "Please connect your wallet first",
+          description: "You need to connect a demo wallet before selecting a level.",
+        })
+        return
+      }
+      if (level > maxUnlocked) {
+        toast({
+          title: "Level Locked",
+          description: `Complete Level ${level - 1} to unlock this level.`,
+        })
+        return
+      }
+      // Navigate to level
+      router.push(`/level/${level}`)
+    },
+    [isConnected, toast, router, maxUnlocked]
+  )
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="relative min-h-screen overflow-hidden">
+      {/* Background gradient overlay */}
+      <div
+        className="pointer-events-none fixed inset-0 z-0"
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 0%, hsl(262 80% 60% / 0.04) 0%, transparent 60%), radial-gradient(ellipse at 80% 80%, hsl(174 80% 45% / 0.03) 0%, transparent 50%)",
+        }}
+        aria-hidden="true"
+      />
+
+      <FloatingIcons />
+      <MouseParticles />
+      <Header onConnectWallet={handleConnectWallet} isConnected={isConnected} />
+
+      <main className="relative z-10 flex min-h-screen flex-col items-center justify-center px-4 pb-36 pt-24">
+        {/* Hero section */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="mb-8 flex flex-col items-center gap-3 text-center"
+        >
+          <h1 className="font-mono text-4xl font-bold italic tracking-tight text-algo-purple sm:text-5xl md:text-6xl lg:text-7xl">
+            <span className="text-balance">AlgoSpeed Arena</span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="max-w-md font-mono text-base text-muted-foreground sm:text-lg"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+            Type fast. Avoid errors. Prove your worth in the Borderless Economy.
+            <br />
+            <span className="text-foreground">Choose your level!</span>
+          </motion.p>
+        </motion.div>
+
+        {/* Level map */}
+        <LevelMap onLevelClick={handleLevelClick} maxUnlocked={maxUnlocked} isConnected={isConnected} />
       </main>
+
+      <ConnectWalletModal open={walletModalOpen} onOpenChange={setWalletModalOpen} />
+
+      <CommunityFooter />
     </div>
-  );
+  )
 }

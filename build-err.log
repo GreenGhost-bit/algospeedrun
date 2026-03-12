@@ -1,0 +1,190 @@
+
+> my-project@0.1.0 build
+> next build
+
+▲ Next.js 16.1.6 (Turbopack)
+
+  Creating an optimized production build ...
+
+> Build error occurred
+Error: Turbopack build failed with 6 errors:
+./node_modules/@txnlab/use-wallet/dist/index.js:6857:28
+Module not found: Can't resolve '@agoralabs-sh/avm-web-provider'
+[0m [90m 6855 |[39m     [36mif[39m ([33m![39m[36mthis[39m[33m.[39mavmWebProviderSDK) {
+ [90m 6856 |[39m       [36mthis[39m[33m.[39mlogger[33m.[39minfo([32m"Initializing @agoralabs-sh/avm-web-provider..."[39m)[33m;[39m
+[31m[1m>[22m[39m[90m 6857 |[39m       [36mconst[39m module [33m=[39m [36mawait[39m [36mimport[39m([32m"@agoralabs-sh/avm-web-provider"[39m)[33m;[39m
+ [90m      |[39m                            [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 6858 |[39m       [36mthis[39m[33m.[39mavmWebProviderSDK [33m=[39m module[33m.[39m[36mdefault[39m [33m?[39m module[33m.[39m[36mdefault[39m [33m:[39m module[33m;[39m
+ [90m 6859 |[39m       [36mif[39m ([33m![39m[36mthis[39m[33m.[39mavmWebProviderSDK) {
+ [90m 6860 |[39m         [36mthrow[39m [36mnew[39m [33mError[39m([0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./node_modules/@txnlab/use-wallet/dist/index.js [Client Component Browser]
+    ./node_modules/@txnlab/use-wallet-react/dist/index.js [Client Component Browser]
+    ./app/level/[id]/page.tsx [Client Component Browser]
+    ./app/level/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/@txnlab/use-wallet/dist/index.js [Client Component SSR]
+    ./node_modules/@txnlab/use-wallet-react/dist/index.js [Client Component SSR]
+    ./app/level/[id]/page.tsx [Client Component SSR]
+    ./app/level/[id]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/@txnlab/use-wallet/dist/index.js:6674:42
+Module not found: Can't resolve '@blockshake/defly-connect'
+[0m [90m 6672 |[39m   [36masync[39m initializeClient() {
+ [90m 6673 |[39m     [36mthis[39m[33m.[39mlogger[33m.[39minfo([32m"Initializing client..."[39m)[33m;[39m
+[31m[1m>[22m[39m[90m 6674 |[39m     [36mconst[39m { [33mDeflyWalletConnect[39m } [33m=[39m [36mawait[39m [36mimport[39m([32m"@blockshake/defly-connect"[39m)[33m;[39m
+ [90m      |[39m                                          [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 6675 |[39m     [36mconst[39m client [33m=[39m [36mnew[39m [33mDeflyWalletConnect[39m([36mthis[39m[33m.[39moptions)[33m;[39m
+ [90m 6676 |[39m     [36mthis[39m[33m.[39mclient [33m=[39m client[33m;[39m
+ [90m 6677 |[39m     [36mthis[39m[33m.[39mlogger[33m.[39minfo([32m"Client initialized"[39m)[33m;[39m[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./node_modules/@txnlab/use-wallet/dist/index.js [Client Component Browser]
+    ./node_modules/@txnlab/use-wallet-react/dist/index.js [Client Component Browser]
+    ./app/level/[id]/page.tsx [Client Component Browser]
+    ./app/level/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/@txnlab/use-wallet/dist/index.js [Client Component SSR]
+    ./node_modules/@txnlab/use-wallet-react/dist/index.js [Client Component SSR]
+    ./app/level/[id]/page.tsx [Client Component SSR]
+    ./app/level/[id]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/@txnlab/use-wallet/dist/index.js:8554:41
+Module not found: Can't resolve '@perawallet/connect'
+[0m [90m 8552 |[39m   [36masync[39m initializeClient() {
+ [90m 8553 |[39m     [36mthis[39m[33m.[39mlogger[33m.[39minfo([32m"Initializing client..."[39m)[33m;[39m
+[31m[1m>[22m[39m[90m 8554 |[39m     [36mconst[39m { [33mPeraWalletConnect[39m } [33m=[39m [36mawait[39m [36mimport[39m([32m"@perawallet/connect"[39m)[33m;[39m
+ [90m      |[39m                                         [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 8555 |[39m     [36mconst[39m client [33m=[39m [36mnew[39m [33mPeraWalletConnect[39m([36mthis[39m[33m.[39moptions)[33m;[39m
+ [90m 8556 |[39m     [36mthis[39m[33m.[39mclient [33m=[39m client[33m;[39m
+ [90m 8557 |[39m     [36mthis[39m[33m.[39mlogger[33m.[39minfo([32m"Client initialized"[39m)[33m;[39m[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./node_modules/@txnlab/use-wallet/dist/index.js [Client Component Browser]
+    ./node_modules/@txnlab/use-wallet-react/dist/index.js [Client Component Browser]
+    ./app/level/[id]/page.tsx [Client Component Browser]
+    ./app/level/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/@txnlab/use-wallet/dist/index.js [Client Component SSR]
+    ./node_modules/@txnlab/use-wallet-react/dist/index.js [Client Component SSR]
+    ./app/level/[id]/page.tsx [Client Component SSR]
+    ./app/level/[id]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/@txnlab/use-wallet/dist/index.js:6279:39
+Module not found: Can't resolve '@walletconnect/modal'
+[0m [90m 6277 |[39m   [36masync[39m initializeModal() {
+ [90m 6278 |[39m     [36mthis[39m[33m.[39mlogger[33m.[39minfo([32m"Initializing modal..."[39m)[33m;[39m
+[31m[1m>[22m[39m[90m 6279 |[39m     [36mconst[39m [33mWalletConnectModal[39m [33m=[39m ([36mawait[39m [36mimport[39m([32m"@walletconnect/modal"[39m))[33m.[39m[33mWalletConnectModal[39m[33m;[39m
+ [90m      |[39m                                       [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 6280 |[39m     [36mconst[39m modal [33m=[39m [36mnew[39m [33mWalletConnectModal[39m({
+ [90m 6281 |[39m       projectId[33m:[39m [36mthis[39m[33m.[39moptions[33m.[39mprojectId[33m,[39m
+ [90m 6282 |[39m       [33m...[39m[36mthis[39m[33m.[39mmodalOptions[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./node_modules/@txnlab/use-wallet/dist/index.js [Client Component Browser]
+    ./node_modules/@txnlab/use-wallet-react/dist/index.js [Client Component Browser]
+    ./app/level/[id]/page.tsx [Client Component Browser]
+    ./app/level/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/@txnlab/use-wallet/dist/index.js [Client Component SSR]
+    ./node_modules/@txnlab/use-wallet-react/dist/index.js [Client Component SSR]
+    ./app/level/[id]/page.tsx [Client Component SSR]
+    ./app/level/[id]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/@txnlab/use-wallet/dist/index.js:6257:31
+Module not found: Can't resolve '@walletconnect/sign-client'
+[0m [90m 6255 |[39m   [36masync[39m initializeClient() {
+ [90m 6256 |[39m     [36mthis[39m[33m.[39mlogger[33m.[39minfo([32m"Initializing client..."[39m)[33m;[39m
+[31m[1m>[22m[39m[90m 6257 |[39m     [36mconst[39m [33mSignClient[39m [33m=[39m ([36mawait[39m [36mimport[39m([32m"@walletconnect/sign-client"[39m))[33m.[39m[33mSignClient[39m[33m;[39m
+ [90m      |[39m                               [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 6258 |[39m     [36mconst[39m client [33m=[39m [36mawait[39m [33mSignClient[39m[33m.[39minit([36mthis[39m[33m.[39moptions)[33m;[39m
+ [90m 6259 |[39m     client[33m.[39mon([32m"session_event"[39m[33m,[39m (args) [33m=>[39m {
+ [90m 6260 |[39m       [36mthis[39m[33m.[39mlogger[33m.[39minfo([32m"EVENT: session_event"[39m[33m,[39m args)[33m;[39m[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./node_modules/@txnlab/use-wallet/dist/index.js [Client Component Browser]
+    ./node_modules/@txnlab/use-wallet-react/dist/index.js [Client Component Browser]
+    ./app/level/[id]/page.tsx [Client Component Browser]
+    ./app/level/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/@txnlab/use-wallet/dist/index.js [Client Component SSR]
+    ./node_modules/@txnlab/use-wallet-react/dist/index.js [Client Component SSR]
+    ./app/level/[id]/page.tsx [Client Component SSR]
+    ./app/level/[id]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/@txnlab/use-wallet/dist/index.js:7846:26
+Module not found: Can't resolve 'lute-connect'
+[0m [90m 7844 |[39m   [36masync[39m initializeClient() {
+ [90m 7845 |[39m     [36mthis[39m[33m.[39mlogger[33m.[39minfo([32m"Initializing client..."[39m)[33m;[39m
+[31m[1m>[22m[39m[90m 7846 |[39m     [36mconst[39m module [33m=[39m [36mawait[39m [36mimport[39m([32m"lute-connect"[39m)[33m;[39m
+ [90m      |[39m                          [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 7847 |[39m     [36mconst[39m [33mLuteConnect[39m [33m=[39m module[33m.[39m[36mdefault[39m[33m;[39m
+ [90m 7848 |[39m     [36mconst[39m client [33m=[39m [36mnew[39m [33mLuteConnect[39m([36mthis[39m[33m.[39moptions[33m?[39m[33m.[39msiteName)[33m;[39m
+ [90m 7849 |[39m     [36mthis[39m[33m.[39mclient [33m=[39m client[33m;[39m[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./node_modules/@txnlab/use-wallet/dist/index.js [Client Component Browser]
+    ./node_modules/@txnlab/use-wallet-react/dist/index.js [Client Component Browser]
+    ./app/level/[id]/page.tsx [Client Component Browser]
+    ./app/level/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/@txnlab/use-wallet/dist/index.js [Client Component SSR]
+    ./node_modules/@txnlab/use-wallet-react/dist/index.js [Client Component SSR]
+    ./app/level/[id]/page.tsx [Client Component SSR]
+    ./app/level/[id]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at ./node_modules/ (txnlab/use-wallet/dist/index.js:6857:28)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at ./node_modules/ (txnlab/use-wallet/dist/index.js:6674:42)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at ./node_modules/ (txnlab/use-wallet/dist/index.js:8554:41)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at ./node_modules/ (txnlab/use-wallet/dist/index.js:6279:39)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at ./node_modules/ (txnlab/use-wallet/dist/index.js:6257:31)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at ./node_modules/ (txnlab/use-wallet/dist/index.js:7846:26)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)

@@ -1,26 +1,62 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* 1. Map your Shadcn/UI variables so 'border-border' works */
+  --color-border: hsl(var(--border));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-accent: hsl(var(--accent));
+  
+  /* 2. Map your custom Algorand colors to utilities */
+  --color-algo-blue: hsl(var(--algo-blue));
+  --color-algo-teal: hsl(var(--algo-teal));
+  
+  /* 3. Register your animations for 'animate-float-drift', etc. */
+  --animation-float-drift: float-drift 6s ease-in-out infinite;
+  --animation-ticker-scroll: ticker-scroll 20s linear infinite;
+  --animation-glow-pulse: glow-pulse 2s ease-in-out infinite;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  @keyframes float-drift {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    25% { transform: translateY(-20px) rotate(5deg); }
+    50% { transform: translateY(-10px) rotate(-3deg); }
+    75% { transform: translateY(-25px) rotate(2deg); }
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  @keyframes ticker-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% { box-shadow: 0 0 20px hsl(225 100% 50% / 0.3); }
+    50% { box-shadow: 0 0 40px hsl(225 100% 50% / 0.6); }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  :root {
+    /* Layout Colors */
+    --background: 220 20% 97%;
+    --foreground: 220 20% 10%;
+    --border: 220 15% 88%;
+    --primary: 262 80% 60%;
+    
+    /* Algorand Brand Colors */
+    --algo-blue: 225 100% 50%;
+    --algo-teal: 174 80% 45%;
+    --radius: 0.75rem;
+  }
+
+  /* Use @apply only for established utilities after @theme registration */
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+  }
 }
